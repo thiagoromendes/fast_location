@@ -22,17 +22,41 @@ class _AddressListState extends State<AddressList> {
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
-        child: ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return _addressItem(widget.addressList[index]);
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(height: 1),
-            itemCount: widget.addressList.length),
+        child: widget.addressList.isEmpty
+            ? _addressListEmpty()
+            : ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return _addressItem(widget.addressList[index]);
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(height: 1),
+                itemCount: widget.addressList.length),
       ),
     ]);
+  }
+
+  Widget _addressListEmpty() {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            Icon(
+              Icons.location_off,
+              size: 50,
+              color: Colors.green,
+            ),
+            Text("Não há locais recentes",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _addressItem(AddressModel address) {

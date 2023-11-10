@@ -2,9 +2,12 @@ import 'package:fast_location/src/modules/history/page/history_page.dart';
 import 'package:fast_location/src/modules/home/page/home_page.dart';
 import 'package:fast_location/src/modules/initial/page/initial_page.dart';
 import 'package:fast_location/src/routes/app_router.dart';
+import 'package:fast_location/src/shared/storage/hive_config.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  HiveConfig.initHiveDatabase();
   runApp(const App());
 }
 

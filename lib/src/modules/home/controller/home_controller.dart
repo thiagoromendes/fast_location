@@ -17,12 +17,28 @@ abstract class _HomeController with Store {
   @observable
   late AddressModel lastAddress;
 
+  @observable
+  late List<AddressModel> addressRecentList;
+
   @action
-  void getAddress(String cep) async {
+  Future<void> loadData() async {
+    isLoading = true;
+    addressRecentList = await _service.getAddressRecentList();
+    isLoading = false;
+  }
+
+  @action
+  Future<void> getAddress(String cep) async {
     isLoading = true;
     lastAddress = await _service.getAddress(cep);
-    print('HomeController.getAddress.address -> ${lastAddress.toJson()}');
+    await updateAddressRecent(lastAddress);
     hasAddress = true;
     isLoading = false;
+  }
+
+  @action
+  Future<void> updateAddressRecent(AddressModel address) async {
+    await _service.updateAddressRecentList(address);
+    addressRecentList = await _service.getAddressRecentList();
   }
 }

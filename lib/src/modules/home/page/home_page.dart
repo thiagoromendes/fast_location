@@ -22,6 +22,12 @@ class _HomePageState extends State<HomePage> {
   TextEditingController searchController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _controller.loadData();
+  }
+
+  @override
   void dispose() {
     searchController.dispose();
     super.dispose();
@@ -138,32 +144,7 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 20),
                             child: AddressList(
-                              addressList: [
-                                AddressModel(
-                                  cep: "88113-740",
-                                  publicPlace: 'Rua José de Anchieta',
-                                  complement: 'N 609, Casa 01',
-                                  neighborhood: 'Areias',
-                                  city: 'São José',
-                                  state: 'SC',
-                                ),
-                                AddressModel(
-                                  cep: "88113-740",
-                                  publicPlace: 'Rua José de Anchieta',
-                                  complement: 'N 609, Casa 01',
-                                  neighborhood: 'Areias',
-                                  city: 'São José',
-                                  state: 'SC',
-                                ),
-                                AddressModel(
-                                  cep: "88113-740",
-                                  publicPlace: 'Rua José de Anchieta',
-                                  complement: 'N 609, Casa 01',
-                                  neighborhood: 'Areias',
-                                  city: 'São José',
-                                  state: 'SC',
-                                )
-                              ],
+                              addressList: _controller.addressRecentList,
                             ),
                           ),
                           AppButton(
