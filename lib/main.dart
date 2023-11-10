@@ -1,3 +1,7 @@
+import 'package:fast_location/src/modules/home/page/home_page.dart';
+import 'package:fast_location/src/modules/initial/page/initial_page.dart';
+import 'package:fast_location/src/modules/search/page/search_page.dart';
+import 'package:fast_location/src/routes/app_router.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,7 +11,6 @@ void main() {
 class App extends StatelessWidget {
   const App({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,8 +18,12 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const Text('Fast Location'),
+      home: const InitialPage(),
       debugShowCheckedModeBanner: false,
+      routes: {
+        AppRouter.home: (context) => const HomePage(),
+        AppRouter.search: (context) => const SearchPage(),
+      },
     );
   }
 }

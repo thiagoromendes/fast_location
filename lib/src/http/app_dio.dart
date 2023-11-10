@@ -5,6 +5,13 @@ mixin AppDio {
   static Future<Dio> getConnection() async {
     Dio dio = Dio();
 
+    final Map<String, String> headers = <String, String>{};
+
+    dio.options = BaseOptions();
+    dio.options.receiveTimeout = 30000;
+    dio.options.sendTimeout = 15000;
+    dio.options.headers = headers;
+
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) async {
         onRequest(options);
@@ -30,7 +37,7 @@ mixin AppDio {
   static void onResponse(
       Response<dynamic> response, ResponseInterceptorHandler handler) {
     debugPrint('-----------| Response log |-----------');
-    debugPrint(response.data);
+    debugPrint(response.data.toString());
     handler.next(response);
   }
 
