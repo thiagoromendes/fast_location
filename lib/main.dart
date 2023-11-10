@@ -1,6 +1,6 @@
+import 'package:fast_location/src/modules/history/page/history_page.dart';
 import 'package:fast_location/src/modules/home/page/home_page.dart';
 import 'package:fast_location/src/modules/initial/page/initial_page.dart';
-import 'package:fast_location/src/modules/search/page/search_page.dart';
 import 'package:fast_location/src/routes/app_router.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         AppRouter.home: (context) => const HomePage(),
-        AppRouter.search: (context) => const SearchPage(),
+        AppRouter.history: (context) => const HistoryPage(),
       },
     );
   }

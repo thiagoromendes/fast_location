@@ -189,9 +189,9 @@ class _HomePageState extends State<HomePage> {
               floatingActionButton: FloatingActionButton(
                 backgroundColor: Colors.green,
                 onPressed: () {
-                  Navigator.of(context).pushNamed(AppRouter.search);
+                  Navigator.of(context).pushNamed(AppRouter.history);
                 },
-                tooltip: 'Nova busca',
+                tooltip: 'Traçar rota',
                 child:
                     const Icon(Icons.fork_right, color: Colors.white, size: 45),
               ),
