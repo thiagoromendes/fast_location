@@ -3,6 +3,8 @@ import 'package:fast_location/src/modules/home/model/address_model.dart';
 import 'package:fast_location/src/modules/home/repositories/home_local_repository.dart';
 import 'package:fast_location/src/modules/home/repositories/home_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:map_launcher/map_launcher.dart';
 
 class HomeService {
   final HomeRepository _repository = HomeRepository();
@@ -44,5 +46,38 @@ class HomeService {
       debugPrint('HomeService.getAddressHistoryList -> ${ex.toString()}');
       rethrow;
     }
+  }
+
+  Future<void> incrementAddressHistoryList(AddressModel address) async {
+    await _localRepository.addAddressHistory(address);
+  }
+
+  Future<void> openMap(BuildContext context, String address) async {
+    try {
+      Map<String, double>? location = await getGeoLocation(address);
+
+      double? latitude = location?["latitude"] ?? 0;
+      double? longitude = location?["longitude"] ?? 0;
+
+      final List<AvailableMap> availableMaps = await MapLauncher.installedMaps;
+
+      if (availableMaps.isNotEmpty) {
+        await availableMaps.first.showDirections(
+          destinationTitle: 'Destino',
+          destination: Coords(latitude, longitude),
+        );
+      }
+    } on Exception {
+      rethrow;
+    }
+  }
+
+  Future<Map<String, double>?> getGeoLocation(String address) async {
+    List<Location> locations = await locationFromAddress(address);
+
+    return {
+      "latitude": locations.first.latitude,
+      "longitude": locations.first.longitude,
+    };
   }
 }

@@ -39,7 +39,7 @@ class _AddressListState extends State<AddressList> {
 
   Widget _addressListEmpty() {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(30.0),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -47,12 +47,15 @@ class _AddressListState extends State<AddressList> {
           children: const [
             Icon(
               Icons.location_off,
-              size: 50,
+              size: 40,
               color: Colors.green,
             ),
-            Text("Não há locais recentes",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text("Não há locais recentes",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            )
           ],
         ),
       ),

@@ -77,7 +77,7 @@ class _SearchAddressState extends State<SearchAddress> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(widget.address.complement)
+                  Text(widget.address.complement ?? '')
                 ],
               ),
             ),

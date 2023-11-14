@@ -16,10 +16,11 @@ class HomeLocalRepository {
     if (addressList != null) {
       addressList.add(address);
     } else {
-      addressList = [address];
+      addressList = [];
+      addressList.add(address);
     }
 
-    final localAddressList = jsonEncode(addressList);
+    final localAddressList = jsonEncode(addressList.reversed.toList());
     await addressBox.put(boxAddressHistory, localAddressList);
   }
 
@@ -29,13 +30,14 @@ class HomeLocalRepository {
     List<AddressModel>? addressList = await getAddressRecent();
 
     if (addressList != null) {
-      addressList.length >= 3 ? addressList.removeLast() : null;
+      addressList.length >= 3 ? addressList.removeAt(0) : null;
       addressList.add(address);
     } else {
-      addressList = [address];
+      addressList = [];
+      addressList.add(address);
     }
 
-    final localAddressList = jsonEncode(addressList);
+    final localAddressList = jsonEncode(addressList.reversed.toList());
     await addressBox.put(boxAddressRecent, localAddressList);
   }
 
@@ -47,9 +49,9 @@ class HomeLocalRepository {
     final localData = addressBox.get(boxAddressHistory);
 
     if (localData != null) {
-      localList.add(jsonDecode(localData));
+      localList = jsonDecode(localData);
       localList.forEach((localData) {
-        addressList.add(AddressModel.fromJson(localData));
+        addressList.add(AddressModel.fromJsonLocal(localData));
       });
       return addressList;
     } else {
@@ -65,10 +67,11 @@ class HomeLocalRepository {
     final localData = addressBox.get(boxAddressRecent);
 
     if (localData != null) {
-      localList.add(jsonDecode(localData));
-      localList.forEach((localData) {
-        addressList.add(AddressModel.fromJson(localData));
+      localList = jsonDecode(localData);
+      localList.forEach((data) {
+        addressList.add(AddressModel.fromJsonLocal(data));
       });
+
       return addressList;
     } else {
       return null;

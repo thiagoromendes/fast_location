@@ -1,7 +1,7 @@
 class AddressModel {
   late String cep;
   late String publicPlace;
-  late String complement;
+  late String? complement;
   late String neighborhood;
   late String city;
   late String state;
@@ -18,10 +18,19 @@ class AddressModel {
   AddressModel.fromJson(Map<String, dynamic> json) {
     cep = json["cep"];
     publicPlace = json["logradouro"];
-    complement = json["complemento"];
+    complement = json["complemento"] ?? '';
     neighborhood = json["bairro"];
     city = json["localidade"];
     state = json["uf"];
+  }
+
+  AddressModel.fromJsonLocal(Map<String, dynamic> json) {
+    cep = json["cep"];
+    publicPlace = json["publicPlace"];
+    complement = json["complement"] ?? '';
+    neighborhood = json["neighborhood"];
+    city = json["city"];
+    state = json["state"];
   }
 
   Map<String, dynamic> toJson() {

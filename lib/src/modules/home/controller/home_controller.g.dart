@@ -25,10 +25,137 @@ mixin _$HomeController on _HomeController, Store {
     });
   }
 
+  late final _$hasAddressAtom =
+      Atom(name: '_HomeController.hasAddress', context: context);
+
+  @override
+  bool get hasAddress {
+    _$hasAddressAtom.reportRead();
+    return super.hasAddress;
+  }
+
+  @override
+  set hasAddress(bool value) {
+    _$hasAddressAtom.reportWrite(value, super.hasAddress, () {
+      super.hasAddress = value;
+    });
+  }
+
+  late final _$hasErrorAtom =
+      Atom(name: '_HomeController.hasError', context: context);
+
+  @override
+  bool get hasError {
+    _$hasErrorAtom.reportRead();
+    return super.hasError;
+  }
+
+  @override
+  set hasError(bool value) {
+    _$hasErrorAtom.reportWrite(value, super.hasError, () {
+      super.hasError = value;
+    });
+  }
+
+  late final _$hasRouteErrorAtom =
+      Atom(name: '_HomeController.hasRouteError', context: context);
+
+  @override
+  bool get hasRouteError {
+    _$hasRouteErrorAtom.reportRead();
+    return super.hasRouteError;
+  }
+
+  @override
+  set hasRouteError(bool value) {
+    _$hasRouteErrorAtom.reportWrite(value, super.hasRouteError, () {
+      super.hasRouteError = value;
+    });
+  }
+
+  late final _$lastAddressAtom =
+      Atom(name: '_HomeController.lastAddress', context: context);
+
+  @override
+  AddressModel? get lastAddress {
+    _$lastAddressAtom.reportRead();
+    return super.lastAddress;
+  }
+
+  @override
+  set lastAddress(AddressModel? value) {
+    _$lastAddressAtom.reportWrite(value, super.lastAddress, () {
+      super.lastAddress = value;
+    });
+  }
+
+  late final _$addressRecentListAtom =
+      Atom(name: '_HomeController.addressRecentList', context: context);
+
+  @override
+  List<AddressModel> get addressRecentList {
+    _$addressRecentListAtom.reportRead();
+    return super.addressRecentList;
+  }
+
+  @override
+  set addressRecentList(List<AddressModel> value) {
+    _$addressRecentListAtom.reportWrite(value, super.addressRecentList, () {
+      super.addressRecentList = value;
+    });
+  }
+
+  late final _$loadDataAsyncAction =
+      AsyncAction('_HomeController.loadData', context: context);
+
+  @override
+  Future<void> loadData() {
+    return _$loadDataAsyncAction.run(() => super.loadData());
+  }
+
+  late final _$getAddressAsyncAction =
+      AsyncAction('_HomeController.getAddress', context: context);
+
+  @override
+  Future<void> getAddress(String cep) {
+    return _$getAddressAsyncAction.run(() => super.getAddress(cep));
+  }
+
+  late final _$updateAddressRecentAsyncAction =
+      AsyncAction('_HomeController.updateAddressRecent', context: context);
+
+  @override
+  Future<void> updateAddressRecent(AddressModel address) {
+    return _$updateAddressRecentAsyncAction
+        .run(() => super.updateAddressRecent(address));
+  }
+
+  late final _$incrementAddressHistoryAsyncAction =
+      AsyncAction('_HomeController.incrementAddressHistory', context: context);
+
+  @override
+  Future<void> incrementAddressHistory(AddressModel address) {
+    return _$incrementAddressHistoryAsyncAction
+        .run(() => super.incrementAddressHistory(address));
+  }
+
+  late final _$routeAsyncAction =
+      AsyncAction('_HomeController.route', context: context);
+
+  @override
+  Future<void> route(BuildContext context) {
+    return _$routeAsyncAction.run(() => super.route(context));
+  }
+
   @override
   String toString() {
     return '''
-isLoading: ${isLoading}
+isLoading: ${isLoading},
+hasAddress: ${hasAddress},
+hasError: ${hasError},
+hasRouteError: ${hasRouteError},
+lastAddress: ${lastAddress},
+addressRecentList: ${addressRecentList}
     ''';
   }
 }
